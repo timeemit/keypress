@@ -1,0 +1,62 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Keypress</title>
+  <link rel="stylesheet" href="stylesheets/pure-min.css">
+  <link rel="stylesheet" href="stylesheets/pure-grids-responsive.css">
+  <style>
+    body { 
+      max-width: 600px;
+      margin: 150 auto;
+    }
+    #cb {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="intro">Press Any Key</h1>
+  <div class="hidden pure-g">
+    <div class="hidden pure-u-1 pure-u-md-1-8">
+      <h1><code id="char"></code></h1>
+    </div>
+    <div class="hidden pure-u-1 pure-u-md-1-8">
+      <h1><code>===</code></h1>
+    </div>
+    <div class="hidden pure-u-1 pure-u-md-3-4">
+      <h1><code>String.fromCharCode(<span id="value"></span>)</code></h1>
+    </div>
+  </div>
+
+  <label for="cb" class="pure-checkbox">
+      <input id="cb" type="checkbox" checked> Capture Control Characters
+  </label>
+
+  <script src='javascripts/jquery-2.1.3.min.js'></script>
+  <script>
+    update_text = function(char_code) {
+      $(".hidden").removeClass("hidden");
+      $("#char").text(String.fromCharCode(char_code));
+      $("#value").text(char_code);
+    };
+    $(window).on("keydown", function(e){
+      if ( $("#cb").prop("checked") && (
+          e.which < 48 ||
+          ( 90 < e.which && e.which < 106 ) || 
+          ( 112 < e.which && e.which < 186 ) ||
+          e.which > 222 ) 
+       ) {
+        e.preventDefault();
+        update_text(e.which);
+        return true;
+      }
+    });
+
+    $(window).on("keypress", function(e){
+      update_text(e.which);
+    });
+    
+  </script>
+</body>
+</html>
