@@ -43,9 +43,9 @@
     $(window).on("keydown", function(e){
       if ( $("#cb").prop("checked") && (
           e.which < 48 ||
-          ( 90 < e.which && e.which < 106 ) || 
+          ( 90 < e.which && e.which < 106 ) ||
           ( 112 < e.which && e.which < 186 ) ||
-          e.which > 222 ) 
+          e.which > 222 )
        ) {
         e.preventDefault();
         update_text(e.which);
